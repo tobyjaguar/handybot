@@ -14,13 +14,7 @@ module.exports = function() {
   // messages.
   bot.on('message', async (msg) => {
     const chatId = msg.chat.id;
-    //console.log(msg);
-    //console.log(`chatId: ${chatId}`);
-    //console.log(`hello ${msg.from.first_name}`);
-    //console.log(`you wrote ${msg.text}`);
 
-    //await getDomain(msg.text);
-    //await getInfo();
     await getName('nb');
     let request = msg.text.trim().toLowerCase();
 
@@ -31,13 +25,12 @@ module.exports = function() {
       switch(command) {
         case '/name':
         let result = await getName(query);
-        console.log(result);
         (result) ?
-        (result.info) ?
+        (result.name) ?
           bot.sendMessage(chatId, `
-            name: ${result.info.name}\nname hash:\n${result.info.nameHash}\nowner:\n${result.info.owner.hash}\nstate: ${result.info.state}\nheight: ${result.info.height}\nrenewal: ${result.info.renewal}\nvalue: ${result.info.value}\nregistered: ${result.info.registered}\nexpired: ${result.info.expired}\ndays until expired: ${result.info.stats.daysUntilExpire}
+            name: ${result.name}\n\nname hash:\n${result.nameHash}\n\nowner:\n${result.owner}\n\nstate: ${result.state}\nheight: ${result.height}\nrenewal: ${result.renewal}\nvalue: ${result.value}\nregistered: ${result.registered}\nexpired: ${result.expired}\ndays until expired: ${result.daysToExpiry}\n\nDNS: ${result.ns}
           `)
-          : bot.sendMessage(chatId, `Oops, I couldn't find that name registered.`) 
+          : bot.sendMessage(chatId, `Oops, I couldn't find that name registered.`)
         : bot.sendMessage(chatId, `Oops, I didn't get that. Try Again`);
         break;
       }

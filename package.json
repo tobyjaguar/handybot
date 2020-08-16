@@ -1,0 +1,27 @@
+{
+  "name": "handybot",
+  "version": "1.0.0",
+  "description": "A telegram bot for Handshake network information",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "config": "^3.3.1",
+    "hs-client": "^0.0.8",
+    "hsd": "^2.1.5",
+    "node-telegram-bot-api": "^0.50.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tobyjaguar/handybot.git"
+  },
+  "author": "tobyjaguar",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/tobyjaguar/handybot/issues"
+  },
+  "homepage": "https://github.com/tobyjaguar/handybot#readme"
+}

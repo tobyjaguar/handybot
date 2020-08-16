@@ -5,14 +5,6 @@ const { NodeClient } = require('hs-client');
 const { Network } = require('hsd');
 const network = Network.get('main');
 
-//const ACCESS_KEY = config.get('apikey');
-//const SECRET_KEY = config.get('apisecret');
-//const baseURL = config.get('endpoint');
-
-//const credentials = Buffer.from(`${ACCESS_KEY}:${SECRET_KEY}`);
-//const encodedCredentials = credentials.toString('base64');
-//const authorization = `Basic ${encodedCredentials}`;
-
 const apikey = config.get('key');
 
 // network type derived from hsd object, client object stores API key
@@ -23,30 +15,6 @@ const clientOptions = {
 }
 
 const client = new NodeClient(clientOptions);
-
-async function getDomain(domain) {
-  let result = {};
-  //let endpoint = `${baseURL}/api/v0/dns/domains/${domain}`
-  let endpoint = `${baseURL}/api/v0/dns/domains/estatex`
-  try {
-    let result = await axios.get(endpoint, {
-      headers: {
-        Authorization: authorization,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }
-    });
-    console.log("result: ")
-    console.log(result)
-  }
-  catch(ex) {
-    console.log(ex);
-    //log(ex);
-  }
-  finally {
-    return result;
-  }
-}
 
 async function getInfo() {
   let result = null;
@@ -64,7 +32,37 @@ async function getInfo() {
 async function getName(name) {
   let result = null;
   try {
-    result = await client.execute('getnameinfo', [ `${name}` ]);
+    result = {};
+    let data = await client.execute('getnameinfo', [ `${name}` ]);
+    if (data.info === null) {
+      result.name = null;
+      return result;
+    } else {
+      result.name = data.info.name;
+      result.nameHash = data.info.nameHash;
+      result.owner = data.info.owner.hash;
+      result.state = data.info.state;
+      result.height= data.info.height;
+      result.renewal= data.info.renewal;
+      result.value = data.info.value;
+      result.registered = data.info.registered;
+      result.expired = data.info.expired;
+      result.daysToExpiry = data.info.stats.daysUntilExpire;
+
+      data =await client.execute('getnameresource', [ `${name}` ]); // ns
+
+      if(data) {
+        let record = '';
+        for(const [key, value] of Object.entries(data)) {
+          value.map(e => {
+            record = record + `\ntype: ${e.type}\nns: ${e.ns}`;
+            (e.address) ? record = record + `\naddress: ${e.address}\n` : null;
+          })
+        }
+        result.ns = record;
+      }
+      return result;
+    }
   }
   catch (ex) {
     console.log(ex);
@@ -75,7 +73,6 @@ async function getName(name) {
 }
 
 module.exports = {
-  getDomain,
   getInfo,
   getName
 }
