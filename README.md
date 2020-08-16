@@ -13,6 +13,6 @@ The idea of a telegram bot to give domain information was still compelling but w
 The next step was researching the `hsd` RCP calls.  The information was available by the node, just not for public consumption. The documentation was suprisingly helpful, and the examples presented a clear solution. The calls in question seem to be `getnameinfo` and `getnameresource`. The fact that this information was available, but only from these RPC calls led to running the `hsd` along with the bot. There was a bit of massaging to get the node running along with the bot service, but NodeJS makes things *just* work quite nicely.
 
 Check out a **video** demonstration:
-<iframe src="https://player.vimeo.com/video/448245155" width="640" height="335" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+[![Handy demo](./video-image.png)](https://vimeo.com/448245155)
 
 Shout out to `@ltfschoen` in the discord for that `getnameresource` RPC.
