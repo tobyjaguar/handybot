@@ -3,7 +3,7 @@
 
 [@HandyDNS_Bot](https://telegram.me/HandyDNS_Bot)
 
-![Handy](./Handy.png)
+![Handy](images/Handy.png)
 
 This project was conceived and designed for **Build An Application With Handshake** hackathon. It is live at: [@HandyDNS_Bot](https://telegram.me/HandyDNS_Bot).
 
@@ -15,7 +15,7 @@ The idea of a telegram bot to give domain information was still compelling but w
 The next step was researching the `hsd` RCP calls.  The information was available from the node, just not for public consumption. The documentation was suprisingly helpful, and the examples presented a clear solution. The calls in question were `getnameinfo` and `getnameresource`. The fact that this information was available, but only from these RPC calls led to running the `hsd` along with the bot. There was a bit of massaging to get the node running along with the bot service, but NodeJS makes things *just* work quite nicely.
 
 Check out a **video** demonstration:
-[![Handy demo](./video-image.png)](https://vimeo.com/448245155)
+[![Handy demo](images/video-image.png)](https://vimeo.com/448245155)
 
 The project is running on an Ubuntu18.04 cloud instance, with PM2 and NodeJS.
 The bot can be found at: [@HandyDNS_Bot](https://telegram.me/HandyDNS_Bot)
