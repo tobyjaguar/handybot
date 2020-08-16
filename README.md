@@ -18,6 +18,6 @@ Check out a **video** demonstration:
 [![Handy demo](images/video-image2.png)](https://vimeo.com/448245155)
 
 The project is running on an Ubuntu18.04 cloud instance, with PM2 and NodeJS.
-The bot can be found at: [@HandyDNS_Bot](https://telegram.me/HandyDNS_Bot)
+The bot can be found at: <a href="(https://telegram.me/HandyDNS_Bot)" target="new">@HandyDNS_Bot</a>
 
 Shout out to `@ltfschoen` in the discord for that `getnameresource` RPC.
