@@ -16,7 +16,7 @@ module.exports = function() {
   bot.on('message', async (msg) => {
     const chatId = msg.chat.id;
 
-    let request = (msg.text === undefined) ? '' : msg.text.trim().toLowerCase();
+    let request = (msg.text) ? msg.text.trim().toLowerCase() : '';
 
     if (request.includes(':')) {
       let reqArr = request.split(':');
