@@ -9,6 +9,7 @@ module.exports = function() {
   const bot = new TelegramBot(token, {polling: true});
 
   const { getInfo, getName } = require('../services/httpService');
+  const { getPrice, getStats } = require('../services/priceService');
 
   // Listen for any kind of message. There are different kinds of
   // messages.
@@ -37,6 +38,18 @@ module.exports = function() {
     }
     else {
       switch(request) {
+        case '/price':
+          let price = getPrice();
+          bot.sendMessage(chatId, `
+            The latest price I have from Namebase is: \n${price} BTC
+          `);
+          break;
+        case '/stats':
+          let stats = getStats();
+          bot.sendMessage(chatId, `
+            The latest stats I have from Namebase are: \nVolume Weighted Average Price: ${stats.volumeWeightedAveragePrice}\nPrice Change: ${stats.priceChange}\nPrice Change Percent: ${stats.priceChangePercent}\nOpen Price: ${stats.openPrice}\nClose Price: ${stats.closePrice}\nVolume: ${stats.volume}\nNumber Of Trades: ${stats.numberOfTrades}
+          `);
+          break;
         case '/help':
           bot.sendMessage(chatId, `
             I can send you info on the Handshake network. Try /commands for a list of commands.
@@ -44,7 +57,7 @@ module.exports = function() {
           break;
         case '/commands':
           bot.sendMessage(chatId, `
-            /getInfo - for network info\n/name:'search name' - look up info on a domain, e.g. /name:nb
+            /getInfo - for network info\n/name:'search name' - look up info on a domain, e.g. /name:nb\n/price - for Namebase $HNSBTC price info\n/stats - for Nambase market info
           `);
           break;
         case '/getinfo':

@@ -8,6 +8,7 @@
     "config": "^3.3.1",
     "hs-client": "^0.0.8",
     "hsd": "^2.1.5",
+    "node-cron": "^2.0.3",
     "node-telegram-bot-api": "^0.50.0"
   },
   "devDependencies": {},
