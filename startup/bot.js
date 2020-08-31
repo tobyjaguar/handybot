@@ -1,15 +1,16 @@
+const config = require('config');
+const TelegramBot = require('node-telegram-bot-api');
+
+// replace the value below with the Telegram token you receive from @BotFather
+const token = config.get('botkey');
+
+// Create a bot that uses 'polling' to fetch new updates
+const bot = new TelegramBot(token, {polling: true});
+
+const { getInfo, getName } = require('../services/httpService');
+const { getPrice, getStats } = require('../services/priceService');
+
 module.exports = function() {
-  const config = require('config');
-  const TelegramBot = require('node-telegram-bot-api');
-
-  // replace the value below with the Telegram token you receive from @BotFather
-  const token = config.get('botkey');
-
-  // Create a bot that uses 'polling' to fetch new updates
-  const bot = new TelegramBot(token, {polling: true});
-
-  const { getInfo, getName } = require('../services/httpService');
-  const { getPrice, getStats } = require('../services/priceService');
 
   // Listen for any kind of message. There are different kinds of
   // messages.
